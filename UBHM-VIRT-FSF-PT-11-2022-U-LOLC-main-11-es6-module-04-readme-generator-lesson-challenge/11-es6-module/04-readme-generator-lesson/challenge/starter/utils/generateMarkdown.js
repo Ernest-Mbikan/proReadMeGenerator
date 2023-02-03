@@ -32,7 +32,7 @@ function generateMarkdown(data) {
 
   ## usage
 
-  $(data.usage)
+  ## $(data.usage)
 `;
 }
 
