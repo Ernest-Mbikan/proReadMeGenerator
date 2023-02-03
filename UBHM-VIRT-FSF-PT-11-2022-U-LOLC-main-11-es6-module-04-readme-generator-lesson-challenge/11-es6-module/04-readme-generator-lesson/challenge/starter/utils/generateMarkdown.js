@@ -18,7 +18,7 @@ function generateMarkdown(data) {
 
   * [Contributing](#contributing)
 
-    * [Tests](#tests)
+  * [Tests](#tests)
 
   * [Questions](#questions)
 
@@ -33,6 +33,8 @@ function generateMarkdown(data) {
   ## usage
 
   ## $(data.usage)
+
+
 `;
 }
 

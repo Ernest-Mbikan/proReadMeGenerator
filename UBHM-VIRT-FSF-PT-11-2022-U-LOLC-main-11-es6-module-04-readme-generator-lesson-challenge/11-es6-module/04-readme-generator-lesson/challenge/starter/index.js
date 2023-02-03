@@ -3,6 +3,54 @@ const path = require('path');
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
 
+//function to render license badge
+ function licenceBadge(license){
+  let badge = '';
+  if(license  === 'MIT'){
+    badge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
+  }else if(license  === 'Apache'){
+    badge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
+  }else if(license  === 'GPL'){
+    badge = '[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)'
+  }else if(license  === 'IBM'){
+    badge = '[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)'
+  }else{
+    badge = ''
+  }
+  return badge;
+ }
+
+
+ //function for the license link
+
+ function renderLicenseLink(license){
+  licenselink = '';
+  if(license  === 'MIT'){
+    licenselink ='https://choosealicense.com/licenses/mit/'
+  }else if(license  === 'Apache'){
+    licenselink = 'https://www.apache.org/licenses/LICENSE-2.0'
+  }else if(license  === 'GPL'){
+    licenselink = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+  }else if(license  === 'IBM'){
+    licenselink === 'https://www.ibm.com/support/pages/ibm-license-agreement-machine-code'
+  }else {
+    licenselink = ''
+  }
+  return licenselink;
+ }
+
+ //function to return  license section and empty string if none is selected
+ function displayLicenseSection(license){
+  licenseSection  = ''
+  if(license  === 'None'){
+    licenseSection  = ''
+  }else {
+    licenseSection = 
+    `License: $(license)`
+  }
+  return licenseSection;
+ }
+
 // array of questions for user
 const questions = [{
 type: 'input',
@@ -28,8 +76,8 @@ name: 'Usage details'
   type: 'list',
 message: 'what licence did you use? ',
 name: 'Licence',
-choices: ['The MIT Licence', 'Te GPL licence', 'Apache Licence', 'GNU Licene', 'None'],
-validation: (value)=>{ if(value){return true} else {return 'Please select a value to continue'}}
+choices: ['The MIT License', 'The GPL license', 'Apache License', 'IBM License', 'None'],
+validation: (license)=>{ if(license){return true} else {return 'Please select a value to continue'}}
 },{
   type: 'input',
 message: 'Who contributed to this project?',
@@ -46,12 +94,12 @@ name: 'Questions'
   type: 'input',
 message: 'github username:',
 name: 'Username',
-validation: (value)=>{ if(value){return true} else {return 'Please enter username to continue'}}
+validation: (Username)=>{ if(Username){return true} else {return 'Please enter username to continue'}}
 },{
   type: 'input',
 message: 'what is your email address?',
 name: 'Email',
-validation: (value)=>{ if(value){return true} else {return 'Please enter email address to continue'}}
+validation: (Email)=>{ if(Email){return true} else {return 'Please enter email address to continue'}}
 }];
 
 // function to write README file
