@@ -1,7 +1,7 @@
 // function to generate markdown for README
 function generateMarkdown(data) {
   return `
-  ## ${data.Title}
+ 
   https://github.com/${data.username}/${data.Title}
 
   ## Description
@@ -9,6 +9,12 @@ function generateMarkdown(data) {
   $(data.Description)
 
   ## Table of Contents 
+  ### *[License](#license)
+  ### *[Installation](#installation)
+  ### *[Usage](#usage)
+  ### *[Contributors](#contributors)
+  ### *[Tests](#tests)
+  ### *[Questions](#questions)
 
   * [Installation](#installation)
 
