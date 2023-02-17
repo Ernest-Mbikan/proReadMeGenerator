@@ -62,19 +62,13 @@ function writeToFile(fileName, data) {
 
 // function to initialize program
 function init() {
-  inquirer.prompt(questions)
-  .then(function(data){
-    writeToFile('README.md', generateMarkdown(data));
+  inquirer.prompt(inquirer)
+  .then((data) => {
+    writeToFile('README.md', generateMarkdown({...inquirer}));
     console.log(data)
   })
 }
 
-// function init() {
-//   inquirer.prompt(questions).then((inquirerResponses) => {
-//     console.log('Generating README...');
-//     writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
-//   });
-// }
 
 // function call to initialize program
 init();
@@ -83,18 +77,18 @@ init();
 
 
 
-
+/*
 //function to render license badge
 function renderLicenseBadge(license){
   let badge = '';
   if(license  === 'MIT'){
-    badge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]`
+    badge = `![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)`
   }else if(license  === 'Apache'){
-    badge = `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)]`
+    badge = `![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)`
   }else if(license  === 'GPL'){
-    badge = `[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)]`
+    badge = `![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)`
   }else if(license  === 'IBM'){
-    badge = `[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)]`
+    badge = `![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)`
   }else{
     badge = ''
   }
@@ -120,17 +114,7 @@ function renderLicenseBadge(license){
   return licenselink;
  }
 
- //function to return  license section and empty string if none is selected
-//  function displayLicenseSection(license){
-//   licenseSection  = ''
-//   if(license  === 'None'){
-//     licenseSection  = ''
-//   }else {
-//     licenseSection = 
-//     `License: $(license)`
-//   }
-//   return licenseSection;
-//  }
+ 
 function renderLicenseSection(license) {
   if (license !== "None") {
     return (
@@ -140,5 +124,5 @@ This project is licensed under the ${license} license.`
     )
   }
   return ''
-}
+}*/
 

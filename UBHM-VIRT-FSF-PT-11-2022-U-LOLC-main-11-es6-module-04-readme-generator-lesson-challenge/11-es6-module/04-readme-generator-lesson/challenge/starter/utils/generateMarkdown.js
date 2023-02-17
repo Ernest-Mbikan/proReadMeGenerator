@@ -1,6 +1,36 @@
+ //function for the license link
+
+ function renderLicenseLink(license){
+  licenselink = '';
+  if(license  === 'MIT'){
+    licenselink ='https://choosealicense.com/licenses/mit/'
+  }else if(license  === 'Apache'){
+    licenselink = 'https://www.apache.org/licenses/LICENSE-2.0'
+  }else if(license  === 'GPL'){
+    licenselink = 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+  }else if(license  === 'IBM'){
+    licenselink === 'https://www.ibm.com/support/pages/ibm-license-agreement-machine-code'
+  }else {
+    licenselink = ''
+  }
+  return licenselink;
+ }
+
+ 
+function renderLicenseSection(license) {
+  if (license !== "None") {
+    return (
+      `## License
+
+This project is licensed under the ${license} license.`
+    )
+  }
+  return ''
+}
+
 // function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.Title}
+ return `# ${data.Title}
    ${renderLicenseBadge(data.license)}
 
   ## Description
@@ -55,80 +85,3 @@ function generateMarkdown(data) {
 }
 
 module.exports = generateMarkdown;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-//   ## Description
-
-//   $(data.Description)
-
-
-//   ## Table of Contents 
-//   ## *[License](#license)
-//   ## *[Installation](#installation)
-//   ## *[Usage](#usage)
-//   ## *[Contributors](#contributors)
-//   ## *[Tests](#tests)
-//   ## *[Questions](#questions)
-
-//   * [Installation](#installation)
-
-//   * [Usage](#usage)
-
-//   * [Licence](#licence)
-
-//   * [Contributing](#contributing)
-
-//   * [Tests](#tests)
-
-//   * [Questions](#questions)
-
-//   ## Installation
-
-//   To install necessary dependencies, run the following command:
-
-//   \`\`\`
-//   ${data.installation}
-//   \`\`\`
-
-//   ## usage
-
-//   ## $(data.usage)
-
-//   ## Contributors:
-//   ## $(data.contribution)
-
-//   ## Tests:
-//   ## To test this app, run the following commands:
-//   ## $(data.Tests)
-
-//   ## Questions:
-//   ## If you have any questions, you may wish to contact me as follows:
-//   ## Github: https://github.com/Ernest-Mbikan
-//   ## Or
-//   ## Email: ernestmbiks@hotmail.com
-
-
-
-// `;
-// }
-
-// module.exports = generateMarkdown;
