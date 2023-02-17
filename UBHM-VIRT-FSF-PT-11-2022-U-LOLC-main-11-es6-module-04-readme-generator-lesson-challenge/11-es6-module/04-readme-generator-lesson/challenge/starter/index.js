@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require('path');
-const inquirer = require("inquirer");
+const inquirer = require('inquirer');
 const generateMarkdown = require("./utils/generateMarkdown");
 
 // array of questions for user
@@ -29,7 +29,7 @@ name: 'Usage details'
 message: 'what licence did you use? ',
 name: 'Licence',
 choices: ['The MIT License', 'The GPL license', 'Apache License', 'IBM License', 'None'],
-validation: (license)=>{ if(license){return true} else {return 'Please select a value to continue'}}
+validation: (License)=>{ if(License){return true} else {return 'Please select a value to continue'}}
 },{
   type: 'input',
 message: 'Who contributed to this project?',
@@ -54,18 +54,47 @@ name: 'Email',
 validation: (Email)=>{ if(Email){return true} else {return 'Please enter email address to continue'}}
 }];
 
+// Function to write readme file
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
+
+
+// function to initialize program
+function init() {
+  inquirer.prompt(questions)
+  .then(function(data){
+    writeToFile('README.md', generateMarkdown(data));
+    console.log(data)
+  })
+}
+
+// function init() {
+//   inquirer.prompt(questions).then((inquirerResponses) => {
+//     console.log('Generating README...');
+//     writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
+//   });
+// }
+
+// function call to initialize program
+init();
+
+
+
+
+
 
 //function to render license badge
-function licenceBadge(license){
+function renderLicenseBadge(license){
   let badge = '';
   if(license  === 'MIT'){
-    badge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'
+    badge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]`
   }else if(license  === 'Apache'){
-    badge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)'
+    badge = `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)]`
   }else if(license  === 'GPL'){
-    badge = '[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)'
+    badge = `[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)]`
   }else if(license  === 'IBM'){
-    badge = '[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)'
+    badge = `[![License: IPL 1.0](https://img.shields.io/badge/License-IPL_1.0-blue.svg)]`
   }else{
     badge = ''
   }
@@ -92,38 +121,24 @@ function licenceBadge(license){
  }
 
  //function to return  license section and empty string if none is selected
- function displayLicenseSection(license){
-  licenseSection  = ''
-  if(license  === 'None'){
-    licenseSection  = ''
-  }else {
-    licenseSection = 
-    `License: $(license)`
+//  function displayLicenseSection(license){
+//   licenseSection  = ''
+//   if(license  === 'None'){
+//     licenseSection  = ''
+//   }else {
+//     licenseSection = 
+//     `License: $(license)`
+//   }
+//   return licenseSection;
+//  }
+function renderLicenseSection(license) {
+  if (license !== "None") {
+    return (
+      `## License
+
+This project is licensed under the ${license} license.`
+    )
   }
-  return licenseSection;
- }
-
-// function to write README file
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName,data, function(err){
-    console.log(fileName)
-    console.log(data)
-    if(err){
-      return console.log(err)
-    }else {
-      console.log('sucess')
-    }
-  })
+  return ''
 }
 
-// function to initialize program
-function init() {
-    inquirer.prompt(questions)
-    .then(function(data){
-      writeToFile('README.md', generateMarkdown(data));
-      console.log(data)
-    })
-}
-
-// function call to initialize program
-init();
